@@ -2,6 +2,8 @@
 
 This is a process injection tool for Linux written in C. It is currently in beta stages and mostly works, however part of the libc parser has to be modified for each process, this will be fixed in coming revisions.
 
+A demo of the code running can be found here: http://ascii.io/a/1749
+
 ## How It Works
 
 First, it attaches to the victim process with ptrace. It then searches through memory for the address to mmap in the process, it runs mmap and captures the return value. Then, it copies the shellcode into the process's memory and sets the process's instruction pointer to the shellcode.
