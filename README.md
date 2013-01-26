@@ -1,6 +1,6 @@
 # Linux Process Injection Tool
 
-This is a process injection tool for Linux written in C. It is currently in beta stages and mostly works, however part of the libc parser has to be modified for each process, this will be fixed in coming revisions.
+This is a process injection tool for Linux written in C. 
 
 A demo of the code running can be found here: http://ascii.io/a/1749
 

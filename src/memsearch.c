@@ -24,12 +24,20 @@
 extern void *find_function(char *func, int pid) {
   char tmp[9], *data = (char*)malloc(1024);
   int counter = 0;
+  long libc;
 
-  long libc = peekdata((void*)ELF_HEADER, pid);
-  libc += peekdata((void*)(ELF_HEADER + 0x10), pid);
-  libc = peekdata((void*)libc + 0x28, pid);
+  char filename[20], line[1024];
+  sprintf(filename, "/proc/%d/maps", pid);
+  FILE *maps = fopen(filename, "r");
 
-  for (libc; (int)peekdata((void*)libc, pid) != 0x464c457f; libc--);
+  while(fgets(line, 1024, maps) != NULL) {
+    if (strstr(line, "libc-") != NULL) {
+      libc = strtol(strtok(line, "-"), NULL, 16);
+      break;
+    }
+  }
+
+  fclose(maps);
 
   long tmp_libc = libc;
   tmp_libc += (int)peekdata((void*)(tmp_libc + 0x4c * 4), pid);
