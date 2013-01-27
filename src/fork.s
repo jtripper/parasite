@@ -8,6 +8,14 @@ fork:
   je child
 
 parent:
+  push $0x3e
+  pop %rax
+  
+  mov %rsi, %rdi
+  push $0xc
+  pop %rsi
+
+  syscall
   ret
 
 child:

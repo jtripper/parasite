@@ -24,6 +24,6 @@
 #include "helper.h"
 #include "ptrace.h"
 
-void inject(int pid, char *shellcode);
+struct user_regs_struct *inject(int pid, char *shellcode);
 
 #endif

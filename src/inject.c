@@ -23,12 +23,17 @@
 
 #define WORD 4
 
-extern void inject(int pid, char *shellcode) {
+extern struct user_regs_struct *inject(int pid, char *shellcode) {
   void **tmp = malloc(sizeof(void*));
 
   long exec_mem = func(pid, "mmap", "munmap", 6, 0x0, strlen(shellcode), 0x7, 0x22, 0x0, 0x0);
+
   struct user_regs_struct *regs = get_regs(pid);
+  struct user_regs_struct *tmp_regs = (struct user_regs_struct*)malloc(sizeof(struct user_regs_struct));
+  memcpy(tmp_regs, regs, sizeof(struct user_regs_struct));
+
   regs->rip = exec_mem;
+  regs->rsi = getpid();
 
   for (int i=0; i < strlen(shellcode) / WORD + 1; i++) {
     memset(tmp, 0, WORD + 1);
@@ -37,4 +42,6 @@ extern void inject(int pid, char *shellcode) {
   }
 
   set_regs(pid, regs);
+
+  return tmp_regs;
 } 
