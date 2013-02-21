@@ -20,7 +20,7 @@ To compile the code just run:
 
 ## Running
 
-At the moment, the code only works against the test program provided, with a little tinkering it can be made to work with any process though. So to run the test program (which simply prints it's pid and then loops):
+To run the test program which simply prints it's pid and then loops, (although this code works with nearly any process.. try it on sshd ;) ):
 
 ```
     $ ./test
