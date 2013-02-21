@@ -1,0 +1,102 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Parasite</title>
+  <meta name="description" content="Linux Runtime Process Injection Tool">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Parasite</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Linux Runtime Process Injection Tool</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/jtRIPper/parasite/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/jtRIPper/parasite/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/jtRIPper/parasite" class="code">View Parasite on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h1>Linux Process Injection Tool</h1>
+
+<p>This is a process injection tool for Linux written in C. </p>
+
+<p>A demo of the code running can be found here: <a href="http://ascii.io/a/1749">http://ascii.io/a/1749</a></p>
+
+<h2>How It Works</h2>
+
+<p>First, it attaches to the victim process with ptrace. It then searches through memory for the address to mmap in the process, it runs mmap and captures the return value. Then, it copies the shellcode into the process's memory and sets the process's instruction pointer to the shellcode.</p>
+
+<p>The shellcode begins with a stub that simply forks, the child continues running the payload, the parent returns to the main process. This may be improved later for stealth. The rest of the shellcode can be anything from a bindshell to hooking functions.</p>
+
+<h2>Compiling</h2>
+
+<p>To compile the code just run:</p>
+
+<pre><code>    $ make
+</code></pre>
+
+<h2>Running</h2>
+
+<p>To run the test program which simply prints it's pid and then loops, (although this code works with nearly any process.. try it on sshd ;) ):</p>
+
+<pre><code>    $ ./test
+    12094
+</code></pre>
+
+<p>Next, run the parasite program.</p>
+
+<pre><code>    $ ./parasite 12094
+</code></pre>
+
+<p>The first time it is run it will hang, ctrl+c out of it and then rerun it, it will work the second time. This is a known bug and will be fixed in the future. At this point, a shell will be listening on port 4444, you can connect to it with netcat.</p>
+
+<h2>Credit</h2>
+
+<p>(c) 2012 jtRIPper</p>
+
+<p><a href="http://blackhatlibrary.net/">http://blackhatlibrary.net/</a></p>
+
+<p><a href="mailto:jack@jtripper.net">jack@jtripper.net</a></p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/jtRIPper" class="avatar"><img src="https://secure.gravatar.com/avatar/efc9fb3f81a61d7b44dd72796a8a9b62?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/jtRIPper">jtRIPper</a> maintains <a href="https://github.com/jtRIPper/parasite">Parasite</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/jtRIPper/parasite/tarball/master" class="tar">tar</a><a href="https://github.com/jtRIPper/parasite/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
