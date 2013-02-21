@@ -41,4 +41,4 @@ The first time it is run it will hang, ctrl+c out of it and then rerun it, it wi
 
 http://blackhatlibrary.net/
 
-jtRIPper@tormail.org
+jack@jtripper.net
